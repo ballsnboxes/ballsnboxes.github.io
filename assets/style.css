@@ -87,6 +87,14 @@ a:hover { color: #9ad0ff; }
 }
 a.pill:hover { border-color: var(--ball); color: #fff; }
 
+/* видео под первым экраном */
+.trailer { margin: 6px 0 0; }
+.trailer video {
+  display: block; width: 100%; height: auto; aspect-ratio: 16 / 9;
+  border-radius: 12px; border: 1px solid var(--panel-line); background: #0a0517;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .5), 0 0 60px rgba(95, 178, 255, .08);
+}
+
 /* скриншоты */
 .shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 26px 0 8px; }
 .shots figure { margin: 0; }

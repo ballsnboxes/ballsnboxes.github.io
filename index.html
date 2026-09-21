@@ -27,12 +27,17 @@
     <div class="soon">Скоро в <span class="pill">RuStore</span> <span class="pill">Huawei AppGallery</span></div>
   </header>
 
+  <div class="trailer">
+    <video autoplay muted loop playsinline preload="auto" poster="/assets/video/gameplay.jpg" width="1280" height="720" aria-label="Геймплей Balls &amp; Boxes">
+      <source src="/assets/video/gameplay.mp4" type="video/mp4">
+    </video>
+  </div>
+
   <div class="shots">
-    <figure class="wide"><img src="/assets/img/shot-1.webp" width="1280" height="720" alt="Игровой экран Balls &amp; Boxes"><figcaption>Зелёный источник лечит, синий заряжает энергию. А кристаллы уже рядом</figcaption></figure>
+    <figure><img src="/assets/img/shot-1.webp" width="1280" height="720" alt="Игровой экран Balls &amp; Boxes"><figcaption>Зелёный источник лечит, синий заряжает энергию. А кристаллы уже рядом</figcaption></figure>
     <figure><img src="/assets/img/shot-2.webp" width="1280" height="720" alt="Их всё больше: кристаллы захватывают мир"><figcaption>Их всё больше: кристаллы захватывают мир</figcaption></figure>
     <figure><img src="/assets/img/shot-3.webp" width="1280" height="720" alt="Удар расчищает путь"><figcaption>Удар расчищает путь</figcaption></figure>
     <figure><img src="/assets/img/shot-4.webp" width="1280" height="720" alt="Дуги стен, молнии и хищные кристаллы"><figcaption>Дуги стен, молнии и хищные кристаллы</figcaption></figure>
-    <figure><img src="/assets/img/shot-5.webp" width="1280" height="720" alt="Выбор уровня: 37 уровней на пяти страницах"><figcaption>Выбор уровня: 37 уровней на пяти страницах</figcaption></figure>
   </div>
 
   <section>
@@ -74,5 +79,11 @@
     </div>
   </footer>
 </div>
+<script>
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const v = document.querySelector('.trailer video');
+    v.removeAttribute('autoplay'); v.pause(); v.controls = true;
+  }
+</script>
 </body>
 </html>
