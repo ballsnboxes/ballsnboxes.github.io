@@ -9,6 +9,8 @@
   --heal: #3ddc84;
   --crystal: #e0414f;
   --amber: #ffb547;
+  --ball-rim: #a8d8ff;   /* обод шара в игре (Ball::redraw) */
+  --box-rim: #ebb861;    /* обод ящика в игре (Box::redraw) */
   --radius: 14px;
   --wrap: 1040px;
   color-scheme: dark;
@@ -60,43 +62,116 @@ a:hover { color: #9ad0ff; }
 .lang a { color: var(--muted); }
 .lang a:hover { color: var(--text); }
 
-/* первый экран */
-.hero { padding: 40px 0 28px; }
-.logo {
-  margin: 0;
-  font-size: clamp(2.3rem, 7.5vw, 4.4rem);
-  font-weight: 900;
-  letter-spacing: .06em;
-  line-height: 1.05;
-  text-transform: uppercase;
-  color: #fff;
-  text-shadow: 0 0 18px rgba(95, 178, 255, .55), 0 0 42px rgba(95, 178, 255, .25);
+/* первый экран: геймплей фоном, логотип цветами игры */
+@font-face {
+  font-family: "BnB Wordmark";
+  src: url("/assets/fonts/wordmark.woff2") format("woff2");
+  font-display: swap;
 }
-.logo .amp { color: var(--crystal); text-shadow: 0 0 18px rgba(224, 65, 79, .6); }
-.tagline { margin: 10px 0 0; font-size: 1.2rem; color: var(--ball); font-weight: 600; letter-spacing: .02em; }
-.lead { max-width: 680px; margin: 18px 0 0; font-size: 1.08rem; color: var(--text); }
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 560px;
+  min-height: min(100svh, 880px);
+  overflow: hidden;
+}
+.hero-video {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+/* Видео и затемнение гаснут к низу маской: первый экран прозрачен и растворяется
+   в фоне страницы (с его свечением) без шва на границе. */
+.hero-video, .hero::before {
+  -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
+}
+/* Затемнение: под текстом слева и снизу, чуть-чуть сверху — под переключатели. */
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(10, 5, 23, .9) 0%, rgba(10, 5, 23, .55) 42%, rgba(10, 5, 23, .12) 72%, rgba(10, 5, 23, .45) 100%),
+    linear-gradient(to right, rgba(10, 5, 23, .78) 0%, rgba(10, 5, 23, .3) 46%, rgba(10, 5, 23, 0) 72%);
+}
+.hero-inner {
+  display: flex; flex-direction: column; justify-content: space-between;
+  width: 100%;
+  padding-bottom: clamp(36px, 7vh, 76px);
+}
+.hero .top { justify-content: flex-end; gap: 12px; }
+.hero .lang { margin-left: 0; }
+.hero-body { max-width: 37rem; }
+
+.wordmark {
+  display: flex; align-items: center; gap: .2em;
+  margin: 0;
+  font-family: "BnB Wordmark", "Liberation Sans", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: clamp(2.1rem, 9vw, 5.4rem);
+  line-height: 1;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.wm-balls { color: var(--ball-rim); text-shadow: 0 0 .26em rgba(168, 216, 255, .55), 0 0 .9em rgba(168, 216, 255, .22); }
+.wm-boxes { color: var(--box-rim); text-shadow: 0 0 .26em rgba(235, 184, 97, .5), 0 0 .9em rgba(235, 184, 97, .2); }
+.wm-amp {
+  flex: none; width: .92em; height: .92em;
+  margin-right: .075em; /* уравнивает просвет с разрядкой слова слева */
+  filter: drop-shadow(0 0 .18em rgba(168, 216, 255, .4));
+}
+
+.tagline { margin: .9em 0 0; font-size: 1.25rem; font-weight: 600; color: var(--text); }
+.lead {
+  max-width: 34em; margin: .7em 0 0;
+  font-size: 1.05rem; color: #d3cfe6;
+  text-shadow: 0 1px 14px rgba(10, 5, 23, .9);
+}
 
 .soon {
-  display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
   margin-top: 24px; font-size: .92rem; color: var(--muted);
 }
 .pill {
   display: inline-block; padding: 5px 12px; border-radius: 999px;
-  border: 1px solid var(--panel-line); background: var(--panel); color: var(--text);
+  border: 1px solid var(--panel-line); background: rgba(10, 5, 23, .55); color: var(--text);
   font-weight: 600; font-size: .88rem; text-decoration: none;
 }
 a.pill:hover { border-color: var(--ball); color: #fff; }
 
-/* видео под первым экраном */
-.trailer { margin: 6px 0 0; }
-.trailer video {
-  display: block; width: 100%; height: auto; aspect-ratio: 16 / 9;
-  border-radius: 12px; border: 1px solid var(--panel-line); background: #0a0517;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, .5), 0 0 60px rgba(95, 178, 255, .08);
+/* пауза видео — рядом с языком, чтобы не спорить с текстом внизу */
+.hero-toggle {
+  display: inline-grid; place-items: center;
+  width: 34px; height: 34px; padding: 0;
+  border-radius: 50%; border: 1px solid rgba(255, 255, 255, .18);
+  background: rgba(10, 5, 23, .55); color: var(--text);
+  cursor: pointer;
+}
+.hero-toggle:hover { border-color: var(--ball-rim); }
+.hero-toggle svg { width: 16px; height: 16px; fill: currentColor; }
+.hero-toggle .i-play, .hero-toggle[data-state="paused"] .i-pause { display: none; }
+.hero-toggle[data-state="paused"] .i-play { display: block; }
+
+/* 404 */
+.notfound { padding: 72px 0 40px; }
+.logo {
+  margin: 0;
+  font-family: "BnB Wordmark", "Liberation Sans", Arial, Helvetica, sans-serif;
+  font-weight: 400; letter-spacing: .075em; line-height: 1.05;
+  color: var(--ball-rim);
+  text-shadow: 0 0 .26em rgba(168, 216, 255, .5);
 }
 
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+:focus-visible { outline: 2px solid var(--ball-rim); outline-offset: 3px; border-radius: 4px; }
+
 /* скриншоты */
-.shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 26px 0 8px; }
+.shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 8px 0 8px; }
 .shots figure { margin: 0; }
 .shots img {
   display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
@@ -104,7 +179,6 @@ a.pill:hover { border-color: var(--ball); color: #fff; }
   box-shadow: 0 10px 30px rgba(0, 0, 0, .45);
 }
 .shots figcaption { font-size: .85rem; color: var(--muted); margin-top: 6px; }
-.shots .wide { grid-column: 1 / -1; }
 
 /* секции */
 section { padding: 26px 0; }
@@ -170,5 +244,4 @@ footer a:hover { color: var(--text); }
 @media (max-width: 680px) {
   html { font-size: 16px; }
   .shots, .features { grid-template-columns: 1fr; }
-  .hero { padding-top: 22px; }
 }
