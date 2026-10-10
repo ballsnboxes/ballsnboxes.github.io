@@ -130,9 +130,23 @@ a:hover { color: #9ad0ff; }
   text-shadow: 0 1px 14px rgba(10, 5, 23, .9);
 }
 
+/* магазины: вышедший — кнопкой, ожидаемый — плашкой рядом */
+.stores {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px;
+  margin-top: 24px;
+}
+.cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 22px; border-radius: 999px;
+  background: var(--ball); color: var(--bg);
+  font-weight: 700; font-size: 1rem; text-decoration: none;
+  box-shadow: 0 0 22px rgba(95, 178, 255, .45);
+}
+.cta:hover { background: var(--ball-rim); color: var(--bg); }
+.cta svg { width: 18px; height: 18px; fill: currentColor; }
 .soon {
   display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
-  margin-top: 24px; font-size: .92rem; color: var(--muted);
+  font-size: .92rem; color: var(--muted);
 }
 .pill {
   display: inline-block; padding: 5px 12px; border-radius: 999px;
