@@ -7,6 +7,7 @@ lijit.com, 584539, RESELLER, fafdf38b16bf6b2b
 openx.com, 562174952, RESELLER, 6a698e2ec38604c6
 rubiconproject.com, 17476, RESELLER, 0bfd66d529a55807
 pubmatic.com, 167514, RESELLER, 5d62403b186f2ace
+yandex.com, 333178719, DIRECT
 themediagrid.com, A8X5S7, RESELLER, 35d5010d7789b49d
 smilewanted.com, 5740, RESELLER
 adform.com, 2671, RESELLER
@@ -86,6 +87,7 @@ pubmatic.com, 137711, RESELLER, 5d62403b186f2ace
 start.io, 168507669, RESELLER
 video.unrulymedia.com, 2444764291, RESELLER, 98c21ef9a666c68b
 video.unrulymedia.com, 3890682751, RESELLER, 98c21ef9a666c68b
+yango-ads.com, 333178719, DIRECT
 video.unrulymedia.com, 630415254, RESELLER, 98c21ef9a666c68b
 rubiconproject.com, 27867, RESELLER, 0bfd66d529a55807
 lijit.com, 530498, RESELLER, fafdf38b16bf6b2b
@@ -123,14 +125,12 @@ rubiconproject.com, 22134, RESELLER, 0bfd66d529a55807
 smartadserver.com, 5450, RESELLER, 060d053dcf45cbf3
 lijit.com, 465542, RESELLER, fafdf38b16bf6b2b
 lijit.com, 551525, RESELLER, fafdf38b16bf6b2b
-yango-ads.com, 312014339, DIRECT
 sonobi.com, 97e60f3067, RESELLER, d1a215d9eb5aee9e
 bidmachine.io, 1201, RESELLER
 themediagrid.com, A6CWLO, RESELLER, 35d5010d7789b49d
 admanmedia.com, 647, RESELLER
 bold-win.com, 1080, RESELLER, 71746737d0bab951
 zetaglobal.net, 689, RESELLER
-yandex.com, 312014339, DIRECT
 apester.com, 1105, RESELLER
 video.unrulymedia.com, 201313863, RESELLER, 98c21ef9a666c68b
 adingo.jp, 33045, RESELLER
