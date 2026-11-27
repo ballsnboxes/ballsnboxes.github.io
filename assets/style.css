@@ -130,7 +130,7 @@ a:hover { color: #9ad0ff; }
   text-shadow: 0 1px 14px rgba(10, 5, 23, .9);
 }
 
-/* магазины: вышедший — кнопкой, ожидаемый — плашкой рядом */
+/* магазины: обе ссылки кнопками — RuStore синяя, Google Play зелёная */
 .stores {
   display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px;
   margin-top: 24px;
@@ -144,16 +144,11 @@ a:hover { color: #9ad0ff; }
 }
 .cta:hover { background: var(--ball-rim); color: var(--bg); }
 .cta svg { width: 18px; height: 18px; fill: currentColor; }
-.soon {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
-  font-size: .92rem; color: var(--muted);
+.cta-gp {
+  background: var(--heal);
+  box-shadow: 0 0 22px rgba(61, 220, 132, .4);
 }
-.pill {
-  display: inline-block; padding: 5px 12px; border-radius: 999px;
-  border: 1px solid var(--panel-line); background: rgba(10, 5, 23, .55); color: var(--text);
-  font-weight: 600; font-size: .88rem; text-decoration: none;
-}
-a.pill:hover { border-color: var(--ball); color: #fff; }
+.cta-gp:hover { background: #63e9a0; color: var(--bg); }
 
 /* пауза видео — рядом с языком, чтобы не спорить с текстом внизу */
 .hero-toggle {
